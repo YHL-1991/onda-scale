@@ -1,0 +1,175 @@
+# ===== 사이트 정보 =====
+site:
+  title: "ONDA | AI 스마트체중계 - 위고비 효과를 2배 연장하는 헬스케어 솔루션"
+  description: "온다 스마트체중계 - 8극 BIA 센서 기반 AI 체성분 분석과 맞춤 건강 코칭으로 체중 관리의 새로운 기준을 제시합니다."
+
+# ===== 히어로 =====
+hero:
+  badge: "AI 스마트체중계"
+  title_line1: "위고비 효과를"
+  title_highlight: "2배 연장"
+  title_line2: "하는"
+  title_line3: "AI 스마트체중계"
+  description: "8극 BIA 센서 기반 정밀 체성분 분석과 AI 맞춤 건강 코칭으로, 체중 감량부터 유지까지 평생 건강한 습관을 만듭니다."
+  button_primary: "사전예약 신청하기"
+  button_secondary: "자세히 알아보기"
+  product_image: "/static/images/onda-product.png"
+  stats:
+    - number: "56"
+      label: "체성분 측정 항목"
+    - number: "r=0.97"
+      label: "DEXA 임상 검증 완료"
+    - number: "5"
+      label: "모델 라인업"
+
+# ===== 문제 인식 =====
+problem:
+  label: "Problem"
+  title: "비만 치료의 숨겨진 위기"
+  description: "GLP-1 약물은 효과적이지만, 중단 후 대부분의 환자가 심각한 부작용을 경험합니다"
+  stats:
+    - number: "80%"
+      label: "요요 재발률"
+    - number: "40%"
+      label: "근손실 비율"
+    - number: "50만"
+      label: "월 약제비"
+    - number: "700%"
+      label: "환자 급증"
+
+# ===== 기능 섹션 (4개) =====
+features:
+  - label: "Hardware"
+    title_line1: "8극 BIA"
+    title_line2: "정밀 측정"
+    description: "상하체를 분리 측정하는 8극 BIA 센서로 최대 56개 체성분 항목을 집에서 매일 측정합니다. DEXA 임상에서 체지방 r=0.939, 골격근 r=0.968 검증 완료."
+    tag: "의료급 정확도"
+  - label: "AI Prediction"
+    title_line1: "대사증후군"
+    title_line2: "위험 예측"
+    description: "체성분 데이터와 AI 알고리즘으로 대사증후군 위험도를 사전 예측합니다. 내장지방, 체지방률, BMI 변화 추이를 종합 분석해 위험 단계별 선제적 알림과 맞춤 개선 가이드를 제공합니다."
+    tag: "선제적 건강 관리"
+  - label: "Trend AI"
+    title_line1: "체성분"
+    title_line2: "트렌드 분석"
+    description: "최근 5회 측정값의 선형회귀로 체지방·근육량·체수분 트렌드를 판정하고, 맞춤 코치 조언을 매 측정 후 제공합니다."
+    tag: "데이터 기반 코칭"
+  - label: "Program"
+    title_line1: "GLP-1"
+    title_line2: "졸업 프로그램"
+    description: "약물 의존도를 줄이면서 건강한 습관으로 독립하는 체계적 24개월 프로그램. 습관 학습부터 자율 관리까지 3단계로 지원합니다."
+    tag: "24개월 로드맵"
+
+# ===== 제품 라인업 =====
+products:
+  section_label: "Products"
+  section_title: "5가지 모델 라인업"
+  section_description: "보급형부터 플래그십까지, 나에게 맞는 스마트체중계를 선택하세요"
+  items:
+    - model: "C"
+      name: "보급형"
+      link: "product-c.html"
+      featured: false
+      specs:
+        - "체중 측정 전용"
+        - "LED 디스플레이"
+        - "앱 미지원"
+      price: "14,900"
+    - model: "A"
+      name: "가성비 주력"
+      link: "product-a.html"
+      featured: true
+      specs:
+        - "4극 BIA / 24개 항목"
+        - "BLE 앱 연동"
+        - "AI 코칭"
+      price: "24,900"
+    - model: "M"
+      name: "HUD 디스플레이"
+      link: "product-m.html"
+      featured: false
+      specs:
+        - "4극 BIA / 24개 항목"
+        - "빔(HUD) 디스플레이"
+        - "2026 하반기 출시"
+      price: "34,900"
+    - model: "Y"
+      name: "프리미엄 디자인"
+      link: "product-y.html"
+      featured: false
+      specs:
+        - "4극 BIA / 24개 항목"
+        - "ITO Film / 4.8\" LCD"
+        - "프리미엄 소재"
+      price: "47,900"
+    - model: "X"
+      name: "플래그십"
+      link: "product-x.html"
+      featured: false
+      specs:
+        - "8극 BIA (핸드그립)"
+        - "ITO Film / 4.8\" LCD"
+        - "56개 항목 / BLE+WiFi"
+      price: "149,000"
+
+# ===== 프로그램 =====
+program:
+  label: "3-Step Program"
+  title: "3단계 졸업 프로그램"
+  description: "GLP-1 약물 의존도를 줄이면서 건강한 습관으로 독립하는 체계적 프로그램"
+  steps:
+    - title: "습관 학습 단계"
+      period: "0 ~ 6개월"
+      description: "AI가 사용자의 대사 프로필을 생성합니다. 개인별 패턴을 파악하고 맞춤형 식단, 운동, 수면 계획을 자동으로 생성합니다."
+    - title: "점진적 전환 단계"
+      period: "7 ~ 12개월"
+      description: "약물 의존도를 매월 10~20%씩 줄이며 디지털 코칭을 강화합니다. 영양사, 트레이너, 의사 모니터링이 동반됩니다."
+    - title: "자율 관리 단계"
+      period: "13 ~ 24개월"
+      description: "사용자 패턴 파악이 완료되어 선제적 알림과 장기 습관 유지 메커니즘이 작동합니다. 완전한 자율 관리가 가능해집니다."
+
+# ===== B2B =====
+b2b:
+  label: "B2B Solutions"
+  title: "비즈니스 파트너를 위한 솔루션"
+  description: "헬스장, 병원, 기업까지 데이터 기반 체성분 관리 솔루션을 제공합니다"
+  cards:
+    - title: "헬스장 / PT센터"
+      description: "회원별 체성분 대시보드로 데이터 기반 운동 프로그램을 설계하고, 회원 유지율을 높입니다."
+      features:
+        - "회원 체성분 실시간 모니터링"
+        - "트레이너용 대시보드"
+        - "데이터 기반 프로그램 설계"
+        - "회원 리텐션 향상"
+    - title: "병원 / 한의원"
+      description: "GLP-1 처방 환자의 체성분 변화를 원격 모니터링하고, 맞춤 치료 프로토콜을 지원합니다."
+      features:
+        - "의사용 환자 대시보드"
+        - "EMR 데이터 연동"
+        - "임상 PoC 검증"
+        - "원격 환자 모니터링"
+    - title: "기업 / 보험사"
+      description: "직원 건강관리 복지 프로그램과 보험사 GLP-1 고객 전용 패키지를 제공합니다. ROI 9배의 비용 절감 효과."
+      features:
+        - "직원 건강관리 프로그램"
+        - "ESG 지표 개선"
+        - "보험사 GLP-1 고객 패키지"
+        - "인당 연 10만원 라이선스"
+
+# ===== CTA =====
+cta:
+  label: "Get Started"
+  title: "건강한 습관이 온다"
+  description: "사전예약 및 파트너십 문의를 환영합니다"
+  email: "365@onda.care"
+  button_primary: "사전예약 문의하기"
+  button_secondary: "제품 라인업 보기"
+
+# ===== 푸터 =====
+footer:
+  company_name: "주식회사 온다"
+  copyright: "2026 주식회사 온다. All Rights Reserved."
+  business_number: "295-81-03754"
+  ceo: "이한라"
+  address: "서울특별시 관악구 관악로 168, 409-마51호"
+  email: "365@onda.care"

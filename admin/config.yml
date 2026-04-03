@@ -1,0 +1,186 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "static/images"
+public_folder: "/static/images"
+
+locale: "ko"
+
+collections:
+  # ===== ONDA 홈페이지 =====
+  - name: "onda"
+    label: "ONDA 홈페이지"
+    files:
+      - name: "onda-homepage"
+        label: "ONDA 홈페이지 콘텐츠"
+        file: "content/onda-content.yml"
+        fields:
+          # ===== 사이트 정보 =====
+          - label: "사이트 정보"
+            name: "site"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "페이지 타이틀 (브라우저 탭)", name: "title", widget: "string" }
+              - { label: "SEO 설명", name: "description", widget: "text" }
+
+          # ===== 히어로 =====
+          - label: "히어로 섹션 (메인 배너)"
+            name: "hero"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "뱃지 텍스트", name: "badge", widget: "string" }
+              - { label: "제목 첫줄", name: "title_line1", widget: "string" }
+              - { label: "골드 강조 텍스트", name: "title_highlight", widget: "string" }
+              - { label: "제목 이어지는 텍스트", name: "title_line2", widget: "string" }
+              - { label: "제목 마지막줄", name: "title_line3", widget: "string" }
+              - { label: "설명", name: "description", widget: "text" }
+              - { label: "메인 버튼", name: "button_primary", widget: "string" }
+              - { label: "보조 버튼", name: "button_secondary", widget: "string" }
+              - { label: "제품 이미지", name: "product_image", widget: "image" }
+              - label: "통계 수치 (3개)"
+                name: "stats"
+                widget: "list"
+                max: 3
+                fields:
+                  - { label: "숫자", name: "number", widget: "string" }
+                  - { label: "설명", name: "label", widget: "string" }
+
+          # ===== 문제 인식 =====
+          - label: "문제 인식 섹션"
+            name: "problem"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "섹션 라벨 (영문)", name: "label", widget: "string" }
+              - { label: "제목", name: "title", widget: "string" }
+              - { label: "설명", name: "description", widget: "text" }
+              - label: "통계 카드 (4개)"
+                name: "stats"
+                widget: "list"
+                max: 4
+                fields:
+                  - { label: "숫자 (예: 80%)", name: "number", widget: "string" }
+                  - { label: "설명", name: "label", widget: "string" }
+
+          # ===== 기능 섹션 =====
+          - label: "핵심 기능 (4개 섹션)"
+            name: "features"
+            widget: "list"
+            max: 4
+            fields:
+              - { label: "라벨 (영문)", name: "label", widget: "string" }
+              - { label: "제목 첫줄", name: "title_line1", widget: "string" }
+              - { label: "제목 둘째줄", name: "title_line2", widget: "string" }
+              - { label: "설명", name: "description", widget: "text" }
+              - { label: "태그", name: "tag", widget: "string" }
+
+          # ===== 제품 라인업 =====
+          - label: "제품 라인업"
+            name: "products"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "섹션 라벨 (영문)", name: "section_label", widget: "string" }
+              - { label: "섹션 제목", name: "section_title", widget: "string" }
+              - { label: "섹션 설명", name: "section_description", widget: "text" }
+              - label: "제품 목록"
+                name: "items"
+                widget: "list"
+                max: 6
+                fields:
+                  - { label: "모델명 (C, A, M, Y, X)", name: "model", widget: "string" }
+                  - { label: "등급 (보급형, 가성비 주력 등)", name: "name", widget: "string" }
+                  - { label: "상세 페이지 링크", name: "link", widget: "string" }
+                  - { label: "BEST 배지 표시", name: "featured", widget: "boolean", default: false }
+                  - label: "스펙 (3개)"
+                    name: "specs"
+                    widget: "list"
+                    max: 3
+                    field: { label: "스펙", name: "spec", widget: "string" }
+                  - { label: "가격 (쉼표 포함, 예: 24,900)", name: "price", widget: "string" }
+
+          # ===== 프로그램 =====
+          - label: "프로그램 섹션"
+            name: "program"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "섹션 라벨 (영문)", name: "label", widget: "string" }
+              - { label: "제목", name: "title", widget: "string" }
+              - { label: "설명", name: "description", widget: "text" }
+              - label: "단계 (3개)"
+                name: "steps"
+                widget: "list"
+                max: 3
+                fields:
+                  - { label: "단계 제목", name: "title", widget: "string" }
+                  - { label: "기간", name: "period", widget: "string" }
+                  - { label: "설명", name: "description", widget: "text" }
+
+          # ===== B2B =====
+          - label: "B2B 솔루션 섹션"
+            name: "b2b"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "섹션 라벨 (영문)", name: "label", widget: "string" }
+              - { label: "제목", name: "title", widget: "string" }
+              - { label: "설명", name: "description", widget: "text" }
+              - label: "파트너 카드 (3개)"
+                name: "cards"
+                widget: "list"
+                max: 3
+                fields:
+                  - { label: "카드 제목", name: "title", widget: "string" }
+                  - { label: "카드 설명", name: "description", widget: "text" }
+                  - label: "특징 목록"
+                    name: "features"
+                    widget: "list"
+                    max: 4
+                    field: { label: "특징", name: "feature", widget: "string" }
+
+          # ===== CTA =====
+          - label: "CTA 섹션 (사전예약)"
+            name: "cta"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "섹션 라벨 (영문)", name: "label", widget: "string" }
+              - { label: "제목", name: "title", widget: "string" }
+              - { label: "설명", name: "description", widget: "text" }
+              - { label: "이메일", name: "email", widget: "string" }
+              - { label: "메인 버튼", name: "button_primary", widget: "string" }
+              - { label: "보조 버튼", name: "button_secondary", widget: "string" }
+
+          # ===== 푸터 =====
+          - label: "푸터"
+            name: "footer"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "회사명", name: "company_name", widget: "string" }
+              - { label: "저작권 문구", name: "copyright", widget: "string" }
+              - { label: "사업자등록번호", name: "business_number", widget: "string" }
+              - { label: "대표이사", name: "ceo", widget: "string" }
+              - { label: "주소", name: "address", widget: "string" }
+              - { label: "대표메일", name: "email", widget: "string" }
+
+  # ===== 다이어트배틀 홈페이지 =====
+  - name: "content"
+    label: "다이어트배틀 콘텐츠"
+    files:
+      - name: "homepage"
+        label: "다이어트배틀 홈페이지"
+        file: "content/content.yml"
+        fields:
+          - label: "사이트 정보"
+            name: "site"
+            widget: "object"
+            collapsed: true
+            fields:
+              - { label: "페이지 타이틀 (브라우저 탭)", name: "title", widget: "string" }
+              - { label: "SEO 설명", name: "description", widget: "text" }
+              - { label: "브랜드명", name: "brand_name", widget: "string" }

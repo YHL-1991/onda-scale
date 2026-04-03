@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ONDA | AI 스마트체중계 - 위고비 효과를 2배 연장하는 헬스케어 솔루션</title>
+  <meta name="description" content="온다 스마트체중계 - 8극 BIA 센서 기반 AI 체성분 분석과 맞춤 건강 코칭으로 체중 관리의 새로운 기준을 제시합니다." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #1d1d1f;
+      line-height: 1.7;
+      overflow-x: hidden;
+      background: #fff;
+      word-break: keep-all;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --apple-black: #1d1d1f;
+      --apple-gray: #86868b;
+      --apple-bg: #f5f5f7;
+      --gold: #c9a96e;
+      --gold-light: #e0c88a;
+      --gold-dark: #a8873f;
+      --navy: #192a41;
+      --navy-dark: #0f1c2e;
+      --navy-light: #243b5a;
+      --white: #ffffff;
+      --container: 1100px;
+      --blue-accent: #4a9eff;
+      --green-accent: #2dd4a8;
+    }
+
+    .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+    /* ===== BUTTONS ===== */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 36px; background: var(--gold); color: var(--navy-dark);
+      font-size: 16px; font-weight: 700; border-radius: 50px;
+      border: none; cursor: pointer; transition: all 0.3s ease;
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,169,110,0.4); }
+    .btn-outline-dark {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 36px; background: transparent; color: var(--apple-black);
+      font-size: 16px; font-weight: 600; border-radius: 50px;
+      border: 2px solid rgba(0,0,0,0.15); cursor: pointer; transition: all 0.3s ease;
+    }
+    .btn-outline-dark:hover { border-color: var(--gold); color: var(--gold); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 36px; background: transparent; color: var(--white);
+      font-size: 16px; font-weight: 600; border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s ease;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      padding: 16px 0; background: rgba(255,255,255,0.8);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      transition: all 0.3s ease;
+    }
+    .nav.scrolled { border-bottom: 1px solid rgba(0,0,0,0.08); }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { height: 44px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 32px; }
+    .nav-links a { color: var(--apple-black); font-size: 14px; font-weight: 500; transition: color 0.3s; opacity: 0.7; }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+    .nav-cta {
+      padding: 10px 24px !important; background: var(--gold) !important;
+      color: var(--navy-dark) !important; border-radius: 50px !important;
+      font-weight: 700 !important; font-size: 13px !important; opacity: 1 !important;
+    }
+    .mobile-toggle {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; background: none; border: none; padding: 4px;
+    }
+    .mobile-toggle span { width: 24px; height: 2px; background: var(--apple-black); border-radius: 2px; transition: 0.3s; }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding-top: 120px; padding-bottom: 40px;
+      background: linear-gradient(180deg, var(--apple-bg) 0%, var(--white) 100%);
+      text-align: center;
+    }
+    .hero-label {
+      display: inline-block; font-size: 14px; font-weight: 600;
+      color: var(--gold); letter-spacing: 1px; margin-bottom: 16px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 72px); font-weight: 800;
+      line-height: 1.15; margin-bottom: 20px; color: var(--apple-black);
+    }
+    .hero h1 .gold { color: var(--gold); }
+    .hero-sub {
+      font-size: 18px; color: var(--apple-gray); max-width: 520px;
+      margin: 0 auto 36px; line-height: 1.7;
+    }
+    .hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 60px; }
+    .hero-visual { position: relative; max-width: 600px; margin: 0 auto; display: flex; align-items: center; justify-content: center; }
+    .hero-visual-bg {
+      position: absolute; width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, rgba(245,245,247,0.5) 70%);
+    }
+    .hero-product { position: relative; z-index: 2; width: 380px; height: auto; filter: drop-shadow(0 40px 80px rgba(0,0,0,0.15)); }
+
+    .hero-stats {
+      display: flex; gap: 48px; justify-content: center; margin-top: 60px;
+      padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .hero-stat .stat-number { font-size: 32px; font-weight: 800; color: var(--gold); }
+    .hero-stat .stat-label { font-size: 13px; color: var(--apple-gray); margin-top: 4px; }
+
+    /* ===== PROBLEM ===== */
+    .problem { padding: 120px 0; background: var(--white); }
+    .problem-header { text-align: center; margin-bottom: 72px; }
+    .problem-header .label { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .problem-header h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin-bottom: 16px; }
+    .problem-header p { font-size: 17px; color: var(--apple-gray); max-width: 600px; margin: 0 auto; }
+    .problem-stats { display: flex; justify-content: center; gap: 0; }
+    .problem-stat {
+      flex: 1; max-width: 250px; text-align: center; padding: 40px 24px;
+      border-right: 1px solid rgba(0,0,0,0.06);
+    }
+    .problem-stat:last-child { border-right: none; }
+    .problem-stat .big-number { font-size: clamp(48px, 8vw, 80px); font-weight: 800; color: var(--gold); line-height: 1; }
+    .problem-stat .stat-desc { font-size: 15px; color: var(--apple-gray); margin-top: 12px; }
+
+    /* ===== FEATURES ===== */
+    .feature-section { padding: 120px 0; }
+    .feature-section.alt { background: var(--apple-bg); }
+    .feature-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    .feature-inner.reverse .feature-text { order: 2; }
+    .feature-inner.reverse .feature-visual { order: 1; }
+    .feature-text .label { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .feature-text h2 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; line-height: 1.2; margin-bottom: 20px; }
+    .feature-text p { font-size: 17px; color: var(--apple-gray); line-height: 1.8; margin-bottom: 20px; }
+    .feature-tag {
+      display: inline-block; padding: 6px 16px; background: rgba(201,169,110,0.1);
+      color: var(--gold-dark); font-size: 13px; font-weight: 600; border-radius: 20px;
+    }
+    .feature-visual {
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature-icon-circle {
+      width: 300px; height: 300px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(201,169,110,0.06), rgba(201,169,110,0.02));
+      border: 1px solid rgba(201,169,110,0.1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .feature-icon-circle svg { width: 120px; height: 120px; stroke: var(--gold); fill: none; stroke-width: 1; }
+
+    /* ===== PRODUCT LINEUP ===== */
+    .product { padding: 120px 0; background: var(--apple-bg); }
+    .product-header { text-align: center; margin-bottom: 56px; }
+    .product-header .label { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .product-header h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin-bottom: 16px; }
+    .product-header p { font-size: 17px; color: var(--apple-gray); max-width: 600px; margin: 0 auto; }
+    .product-scroll {
+      display: flex; gap: 16px; padding: 20px 0 40px;
+      max-width: var(--container); margin: 0 auto; padding-left: 24px; padding-right: 24px;
+    }
+    .product-item {
+      flex: 1; min-width: 0; background: var(--white); border-radius: 20px;
+      padding: 36px 24px; text-align: center; border: 2px solid transparent;
+      transition: all 0.3s ease;
+      display: flex; flex-direction: column; cursor: pointer;
+    }
+    .product-item:hover { transform: translateY(-8px); box-shadow: 0 20px 60px rgba(0,0,0,0.08); border-color: rgba(201,169,110,0.3); }
+    .product-item.featured { border-color: var(--gold); position: relative; }
+    .product-item.featured::before {
+      content: 'BEST'; position: absolute; top: -12px; left: 50%;
+      transform: translateX(-50%); padding: 4px 16px; background: var(--gold);
+      color: var(--navy-dark); font-size: 11px; font-weight: 800; border-radius: 20px; letter-spacing: 1px;
+    }
+    .product-model { font-size: 40px; font-weight: 900; color: var(--apple-black); margin-bottom: 4px; }
+    .product-name { font-size: 13px; color: var(--apple-gray); font-weight: 500; margin-bottom: 20px; }
+    .product-icon-area {
+      width: 80px; height: 80px; margin: 0 auto 20px; background: var(--apple-bg);
+      border-radius: 20px; display: flex; align-items: center; justify-content: center;
+    }
+    .product-icon-area svg { width: 40px; height: 40px; stroke: var(--apple-black); fill: none; stroke-width: 1.2; }
+    .product-features { margin-bottom: 20px; flex-grow: 1; }
+    .product-features li { font-size: 13px; color: var(--apple-gray); padding: 6px 0; border-bottom: 1px solid rgba(0,0,0,0.04); }
+    .product-features li:last-child { border: none; }
+    .product-price { font-size: 24px; font-weight: 800; color: var(--apple-black); }
+    .product-price .won { font-size: 14px; font-weight: 500; }
+    .product-detail-link { margin-top: 12px; font-size: 13px; font-weight: 600; color: var(--gold-dark); }
+    .product-item:hover .product-detail-link { color: var(--gold); }
+
+    /* ===== PROGRAM ===== */
+    .program { padding: 120px 0; background: var(--white); }
+    .program-header { text-align: center; margin-bottom: 72px; }
+    .program-header .label { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .program-header h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin-bottom: 16px; }
+    .program-header p { font-size: 17px; color: var(--apple-gray); max-width: 600px; margin: 0 auto; }
+    .program-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .program-step {
+      padding: 40px 28px; border-radius: 20px; background: var(--apple-bg);
+      position: relative; transition: all 0.3s;
+    }
+    .program-step:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.04); }
+    .step-num {
+      font-size: 56px; font-weight: 800; color: rgba(201,169,110,0.15);
+      position: absolute; top: 20px; right: 24px; line-height: 1;
+    }
+    .program-step h4 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+    .step-period { font-size: 13px; color: var(--gold-dark); font-weight: 600; margin-bottom: 16px; }
+    .program-step p { font-size: 14px; color: var(--apple-gray); line-height: 1.8; }
+
+    /* ===== B2B ===== */
+    .b2b { padding: 120px 0; background: var(--apple-bg); }
+    .b2b-header { text-align: center; margin-bottom: 72px; }
+    .b2b-header .label { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .b2b-header h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; margin-bottom: 16px; }
+    .b2b-header p { font-size: 17px; color: var(--apple-gray); max-width: 600px; margin: 0 auto; }
+    .b2b-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+    .b2b-card {
+      padding: 40px 28px; background: var(--white); border-radius: 20px;
+      transition: all 0.3s; position: relative; overflow: hidden;
+    }
+    .b2b-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .b2b-card:nth-child(1)::before { background: var(--gold); }
+    .b2b-card:nth-child(2)::before { background: var(--blue-accent); }
+    .b2b-card:nth-child(3)::before { background: var(--green-accent); }
+    .b2b-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.06); }
+    .b2b-card h4 { font-size: 20px; font-weight: 700; margin-bottom: 12px; }
+    .b2b-card p { font-size: 14px; color: var(--apple-gray); line-height: 1.8; margin-bottom: 20px; }
+    .b2b-features { display: flex; flex-direction: column; gap: 8px; }
+    .b2b-feat { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--apple-gray); }
+    .b2b-feat::before {
+      content: ''; width: 18px; height: 18px; min-width: 18px;
+      background: var(--apple-bg); border-radius: 50%;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c9a96e' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: 10px;
+    }
+
+    /* ===== CTA ===== */
+    .cta {
+      padding: 140px 0; background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .cta::before {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(201,169,110,0.08) 0%, transparent 70%); border-radius: 50%;
+    }
+    .cta-content { position: relative; z-index: 2; }
+    .cta .label { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: block; }
+    .cta h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; color: var(--white); margin-bottom: 16px; }
+    .cta p { font-size: 18px; color: rgba(255,255,255,0.6); margin-bottom: 40px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+    /* ===== FOOTER ===== */
+    .footer { padding: 60px 0 40px; background: var(--navy-dark); color: rgba(255,255,255,0.4); }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+    .footer-brand .nav-logo { margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .footer-brand .nav-logo img { height: 60px !important; filter: brightness(1.2); }
+    .footer-brand .footer-company-name { font-size: 20px; font-weight: 600; color: rgba(255,255,255,0.9); letter-spacing: 0.5px; }
+    .footer-col h5 { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.7); margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 13px; padding: 4px 0; color: rgba(255,255,255,0.4); transition: color 0.3s; }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; justify-content: space-between; align-items: center; font-size: 12px;
+    }
+    .company-toggle { margin-top: 20px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); text-align: center; }
+    .company-toggle-btn {
+      background: none; border: 1px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.5); font-size: 12px; padding: 8px 20px;
+      border-radius: 20px; cursor: pointer; transition: all 0.3s; font-family: inherit;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .company-toggle-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .company-toggle-btn .arrow { transition: transform 0.3s; font-size: 10px; }
+    .company-toggle-btn.active .arrow { transform: rotate(180deg); }
+    .company-detail { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease; opacity: 0; margin-top: 0; }
+    .company-detail.open { max-height: 200px; opacity: 1; margin-top: 16px; }
+    .company-detail-inner { font-size: 12px; color: rgba(255,255,255,0.35); line-height: 2; }
+
+    /* ===== ANIMATIONS ===== */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-scale { opacity: 0; transform: scale(0.95); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+    /* ===== MOBILE ===== */
+    .mobile-br { display: none; }
+    @media (max-width: 1024px) {
+      .feature-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
+      .feature-inner.reverse .feature-text { order: 1; }
+      .feature-inner.reverse .feature-visual { order: 2; }
+      .feature-visual { order: 1 !important; }
+      .feature-text { order: 2 !important; }
+      .feature-icon-circle { width: 240px; height: 240px; }
+      .feature-icon-circle svg { width: 100px; height: 100px; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .mobile-br { display: inline; }
+      .nav-links { display: none; }
+      .mobile-toggle { display: flex; }
+      .nav-links.active {
+        display: flex; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0; background: rgba(255,255,255,0.98);
+        backdrop-filter: blur(20px); padding: 24px; gap: 16px;
+        border-bottom: 1px solid rgba(0,0,0,0.06);
+      }
+      .hero { padding-top: 100px; }
+      .hero h1 { font-size: clamp(32px, 8vw, 52px); }
+      .hero-product { width: 280px; }
+      .hero-visual-bg { width: 280px; height: 280px; }
+
+      .hero-stats { flex-direction: column; gap: 20px; align-items: center; }
+      .problem { padding: 80px 0; }
+      .problem-stats { flex-wrap: wrap; }
+      .problem-stat { flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(0,0,0,0.06); padding: 24px 16px; }
+      .problem-stat:nth-child(3), .problem-stat:nth-child(4) { border-bottom: none; }
+      .feature-section { padding: 80px 0; }
+      .product { padding: 80px 0; }
+      .product-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; scrollbar-width: none; }
+      .product-scroll::-webkit-scrollbar { display: none; }
+      .product-item { min-width: 220px; flex: 0 0 220px; }
+      .program { padding: 80px 0; }
+      .program-steps { grid-template-columns: 1fr; }
+      .b2b { padding: 80px 0; }
+      .b2b-grid { grid-template-columns: 1fr; }
+      .cta { padding: 80px 0; }
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 32px; }
+      .problem-stat { flex: 1 1 100%; }
+      .problem-stat .big-number { font-size: 56px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">
+      <img src="/static/images/onda-logo.png" alt="ONDA" style="height:44px; width:auto;">
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#problem">문제인식</a>
+      <a href="#solution">솔루션</a>
+      <a href="#product">제품</a>
+      <a href="#program">프로그램</a>
+      <a href="#b2b">B2B</a>
+      <a href="company.html">회사소개</a>
+      <a href="#contact" class="nav-cta">사전예약</a>
+    </div>
+    <button class="mobile-toggle" id="mobileToggle" aria-label="메뉴 열기">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-label reveal" data-cms="hero.badge">AI 스마트체중계</div>
+    <h1 class="reveal" data-cms="hero.title">위고비 효과를<br><span class="gold">2배 연장</span>하는<br>AI 스마트체중계</h1>
+    <p class="hero-sub reveal" data-cms="hero.description">8극 BIA 센서 기반 정밀 체성분 분석과 AI 맞춤 건강 코칭으로, 체중 감량부터 유지까지 평생 건강한 습관을 만듭니다.</p>
+    <div class="hero-buttons reveal">
+      <a href="#contact" class="btn-primary" data-cms="hero.btn_primary">사전예약 신청하기 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      <a href="#solution" class="btn-outline-dark" data-cms="hero.btn_secondary">자세히 알아보기</a>
+    </div>
+    <div class="hero-visual reveal-scale">
+      <div class="hero-visual-bg"></div>
+      <img class="hero-product" data-cms="hero.product_image" src="/static/images/onda-product.png" alt="ONDA 스마트체중계">
+
+    </div>
+    <div class="hero-stats reveal">
+      <div class="hero-stat">
+        <div class="stat-number" data-cms="hero.stat0.number">56</div>
+        <div class="stat-label" data-cms="hero.stat0.label">체성분 측정 항목</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number" data-cms="hero.stat1.number">r=0.97</div>
+        <div class="stat-label" data-cms="hero.stat1.label">DEXA 임상 검증 완료</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-number" data-cms="hero.stat2.number">5</div>
+        <div class="stat-label" data-cms="hero.stat2.label">모델 라인업</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem" id="problem">
+  <div class="container">
+    <div class="problem-header reveal">
+      <div class="label" data-cms="problem.label">Problem</div>
+      <h2 data-cms="problem.title">비만 치료의 숨겨진 위기</h2>
+      <p data-cms="problem.description">GLP-1 약물은 효과적이지만, 중단 후 대부분의 환자가 심각한 부작용을 경험합니다</p>
+    </div>
+    <div class="problem-stats">
+      <div class="problem-stat reveal">
+        <div class="big-number" data-cms="problem.stat0.number">80%</div>
+        <div class="stat-desc" data-cms="problem.stat0.label">요요 재발률</div>
+      </div>
+      <div class="problem-stat reveal" style="transition-delay:0.1s">
+        <div class="big-number" data-cms="problem.stat1.number">40%</div>
+        <div class="stat-desc" data-cms="problem.stat1.label">근손실 비율</div>
+      </div>
+      <div class="problem-stat reveal" style="transition-delay:0.2s">
+        <div class="big-number" data-cms="problem.stat2.number">50만</div>
+        <div class="stat-desc" data-cms="problem.stat2.label">월 약제비</div>
+      </div>
+      <div class="problem-stat reveal" style="transition-delay:0.3s">
+        <div class="big-number" data-cms="problem.stat3.number">700%</div>
+        <div class="stat-desc" data-cms="problem.stat3.label">환자 급증</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES (Solution) -->
+<section class="feature-section" id="solution">
+  <div class="container">
+    <div class="feature-inner reveal">
+      <div class="feature-text">
+        <div class="label" data-cms="feature0.label">Hardware</div>
+        <h2 data-cms="feature0.title">8극 BIA<br>정밀 측정</h2>
+        <p data-cms="feature0.description">상하체를 분리 측정하는 8극 BIA 센서로 최대 56개 체성분 항목을 집에서 매일 측정합니다. DEXA 임상에서 체지방 r=0.939, 골격근 r=0.968 검증 완료.</p>
+        <span class="feature-tag" data-cms="feature0.tag">의료급 정확도</span>
+      </div>
+      <div class="feature-visual">
+        <div class="feature-icon-circle">
+          <svg viewBox="0 0 100 100"><rect x="15" y="30" width="70" height="45" rx="8" stroke-width="1.5"/><circle cx="50" cy="52" r="10" stroke-width="1.5"/><line x1="35" y1="42" x2="65" y2="42" stroke-width="1.5"/><path d="M30 30 V20 M70 30 V20" stroke-width="1.5"/><circle cx="30" cy="18" r="3" stroke-width="1"/><circle cx="70" cy="18" r="3" stroke-width="1"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feature-section alt">
+  <div class="container">
+    <div class="feature-inner reverse reveal">
+      <div class="feature-text">
+        <div class="label" data-cms="feature1.label">AI Prediction</div>
+        <h2 data-cms="feature1.title">대사증후군<br>위험 예측</h2>
+        <p data-cms="feature1.description">체성분 데이터와 AI 알고리즘으로 대사증후군 위험도를 사전 예측합니다. 내장지방, 체지방률, BMI 변화 추이를 종합 분석해 위험 단계별 선제적 알림과 맞춤 개선 가이드를 제공합니다.</p>
+        <span class="feature-tag" data-cms="feature1.tag">선제적 건강 관리</span>
+      </div>
+      <div class="feature-visual">
+        <div class="feature-icon-circle">
+          <svg viewBox="0 0 100 100"><path d="M50 75 L25 50 Q15 35 30 25 Q45 18 50 35 Q55 18 70 25 Q85 35 75 50 Z" stroke-width="1.5" fill="none"/><path d="M50 42 V58" stroke-width="2.5" stroke-linecap="round"/><circle cx="50" cy="64" r="2" fill="currentColor" stroke="none"/><path d="M20 80 L35 80 L42 72 L50 85 L58 68 L65 80 L80 80" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feature-section">
+  <div class="container">
+    <div class="feature-inner reveal">
+      <div class="feature-text">
+        <div class="label" data-cms="feature2.label">Trend AI</div>
+        <h2 data-cms="feature2.title">체성분<br>트렌드 분석</h2>
+        <p data-cms="feature2.description">최근 5회 측정값의 선형회귀로 체지방·근육량·체수분 트렌드를 판정하고, 맞춤 코치 조언을 매 측정 후 제공합니다.</p>
+        <span class="feature-tag" data-cms="feature2.tag">데이터 기반 코칭</span>
+      </div>
+      <div class="feature-visual">
+        <div class="feature-icon-circle">
+          <svg viewBox="0 0 100 100"><path d="M20 70 L40 50 L55 58 L80 30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="70" r="3" stroke-width="1"/><circle cx="40" cy="50" r="3" stroke-width="1"/><circle cx="55" cy="58" r="3" stroke-width="1"/><circle cx="80" cy="30" r="3" stroke-width="1"/><path d="M15 80 H85" stroke-width="1" opacity="0.3"/><path d="M15 20 V80" stroke-width="1" opacity="0.3"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feature-section alt">
+  <div class="container">
+    <div class="feature-inner reverse reveal">
+      <div class="feature-text">
+        <div class="label" data-cms="feature3.label">Program</div>
+        <h2 data-cms="feature3.title">GLP-1<br>졸업 프로그램</h2>
+        <p data-cms="feature3.description">약물 의존도를 줄이면서 건강한 습관으로 독립하는 체계적 24개월 프로그램. 습관 학습부터 자율 관리까지 3단계로 지원합니다.</p>
+        <span class="feature-tag" data-cms="feature3.tag">24개월 로드맵</span>
+      </div>
+      <div class="feature-visual">
+        <div class="feature-icon-circle">
+          <svg viewBox="0 0 100 100"><path d="M35 70 L50 30 L65 70" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 58 H60" stroke-width="1.5"/><path d="M50 25 L50 15" stroke-width="1.5"/><path d="M44 18 L50 12 L56 18" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="50" cy="50" r="30" stroke-width="1" opacity="0.3" stroke-dasharray="4 4"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCT LINEUP -->
+<section class="product" id="product">
+  <div class="container">
+    <div class="product-header reveal">
+      <div class="label" data-cms="products.label">Products</div>
+      <h2 data-cms="products.title">5가지 모델 라인업</h2>
+      <p data-cms="products.description">보급형부터 플래그십까지, 나에게 맞는 스마트체중계를 선택하세요</p>
+    </div>
+  </div>
+  <div class="product-scroll">
+    <a href="product-c.html" data-cms="product0.link" class="product-item reveal" style="text-decoration:none;color:inherit;">
+      <div class="product-model" data-cms="product0.model">C</div>
+      <div class="product-name" data-cms="product0.name">보급형</div>
+      <div class="product-icon-area">
+        <svg viewBox="0 0 60 60"><rect x="8" y="18" width="44" height="30" rx="6" stroke="currentColor" fill="none" stroke-width="1.5"/><line x1="24" y1="33" x2="36" y2="33" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <ul class="product-features">
+        <li data-cms="product0.spec0">체중 측정 전용</li>
+        <li data-cms="product0.spec1">LED 디스플레이</li>
+        <li data-cms="product0.spec2">앱 미지원</li>
+      </ul>
+      <div class="product-price"><span class="won">&#8361;</span><span data-cms="product0.price">14,900</span></div>
+      <div class="product-detail-link">자세히 보기 →</div>
+    </a>
+    <a href="product-a.html" data-cms="product1.link" class="product-item featured reveal" style="transition-delay:0.05s;text-decoration:none;color:inherit;">
+      <div class="product-model" data-cms="product1.model">A</div>
+      <div class="product-name" data-cms="product1.name">가성비 주력</div>
+      <div class="product-icon-area">
+        <svg viewBox="0 0 60 60"><rect x="8" y="18" width="44" height="30" rx="6" stroke="currentColor" fill="none" stroke-width="1.5"/><circle cx="30" cy="33" r="6" stroke="currentColor" fill="none" stroke-width="1.5"/><line x1="24" y1="28" x2="36" y2="28" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <ul class="product-features">
+        <li data-cms="product1.spec0">4극 BIA / 24개 항목</li>
+        <li data-cms="product1.spec1">BLE 앱 연동</li>
+        <li data-cms="product1.spec2">AI 코칭</li>
+      </ul>
+      <div class="product-price"><span class="won">&#8361;</span><span data-cms="product1.price">24,900</span></div>
+      <div class="product-detail-link">자세히 보기 →</div>
+    </a>
+    <a href="product-m.html" data-cms="product2.link" class="product-item reveal" style="transition-delay:0.1s;text-decoration:none;color:inherit;">
+      <div class="product-model" data-cms="product2.model">M</div>
+      <div class="product-name" data-cms="product2.name">HUD 디스플레이</div>
+      <div class="product-icon-area">
+        <svg viewBox="0 0 60 60"><rect x="8" y="18" width="44" height="30" rx="6" stroke="currentColor" fill="none" stroke-width="1.5"/><rect x="16" y="22" width="28" height="16" rx="3" stroke="currentColor" fill="none" stroke-width="1"/><circle cx="30" cy="30" r="4" stroke="currentColor" fill="none" stroke-width="1"/></svg>
+      </div>
+      <ul class="product-features">
+        <li data-cms="product2.spec0">4극 BIA / 24개 항목</li>
+        <li data-cms="product2.spec1">빔(HUD) 디스플레이</li>
+        <li data-cms="product2.spec2">2026 하반기 출시</li>
+      </ul>
+      <div class="product-price"><span class="won">&#8361;</span><span data-cms="product2.price">34,900</span></div>
+      <div class="product-detail-link">자세히 보기 →</div>
+    </a>
+    <a href="product-y.html" data-cms="product3.link" class="product-item reveal" style="transition-delay:0.15s;text-decoration:none;color:inherit;">
+      <div class="product-model" data-cms="product3.model">Y</div>
+      <div class="product-name" data-cms="product3.name">프리미엄 디자인</div>
+      <div class="product-icon-area">
+        <svg viewBox="0 0 60 60"><rect x="8" y="18" width="44" height="30" rx="6" stroke="currentColor" fill="none" stroke-width="1.5"/><path d="M20 23 L30 18 L40 23" stroke="currentColor" fill="none" stroke-width="1.5"/><line x1="24" y1="33" x2="36" y2="33" stroke="currentColor" stroke-width="1.5"/></svg>
+      </div>
+      <ul class="product-features">
+        <li data-cms="product3.spec0">4극 BIA / 24개 항목</li>
+        <li data-cms="product3.spec1">ITO Film / 4.8" LCD</li>
+        <li data-cms="product3.spec2">프리미엄 소재</li>
+      </ul>
+      <div class="product-price"><span class="won">&#8361;</span><span data-cms="product3.price">47,900</span></div>
+      <div class="product-detail-link">자세히 보기 →</div>
+    </a>
+    <a href="product-x.html" data-cms="product4.link" class="product-item reveal" style="transition-delay:0.2s;text-decoration:none;color:inherit;">
+      <div class="product-model" data-cms="product4.model">X</div>
+      <div class="product-name" data-cms="product4.name">플래그십</div>
+      <div class="product-icon-area">
+        <svg viewBox="0 0 60 60"><rect x="8" y="18" width="44" height="30" rx="6" stroke="currentColor" fill="none" stroke-width="1.5"/><path d="M16 22 L30 16 L44 22" stroke="currentColor" fill="none" stroke-width="1.5"/><circle cx="30" cy="33" r="5" stroke="currentColor" fill="none" stroke-width="1.5"/><line x1="25" y1="33" x2="35" y2="33" stroke="currentColor" stroke-width="1"/><line x1="30" y1="28" x2="30" y2="38" stroke="currentColor" stroke-width="1"/></svg>
+      </div>
+      <ul class="product-features">
+        <li data-cms="product4.spec0">8극 BIA (핸드그립)</li>
+        <li data-cms="product4.spec1">ITO Film / 4.8" LCD</li>
+        <li data-cms="product4.spec2">56개 항목 / BLE+WiFi</li>
+      </ul>
+      <div class="product-price"><span class="won">&#8361;</span><span data-cms="product4.price">149,000</span></div>
+      <div class="product-detail-link">자세히 보기 →</div>
+    </a>
+  </div>
+</section>
+
+<!-- PROGRAM -->
+<section class="program" id="program">
+  <div class="container">
+    <div class="program-header reveal">
+      <div class="label" data-cms="program.label">3-Step Program</div>
+      <h2 data-cms="program.title">3단계 졸업 프로그램</h2>
+      <p data-cms="program.description">GLP-1 약물 의존도를 줄이면서 건강한 습관으로 독립하는 체계적 프로그램</p>
+    </div>
+    <div class="program-steps">
+      <div class="program-step reveal">
+        <div class="step-num">01</div>
+        <h4 data-cms="program.step0.title">습관 학습 단계</h4>
+        <div class="step-period" data-cms="program.step0.period">0 ~ 6개월</div>
+        <p data-cms="program.step0.description">AI가 사용자의 대사 프로필을 생성합니다. 개인별 패턴을 파악하고 맞춤형 식단, 운동, 수면 계획을 자동으로 생성합니다.</p>
+      </div>
+      <div class="program-step reveal" style="transition-delay:0.1s">
+        <div class="step-num">02</div>
+        <h4 data-cms="program.step1.title">점진적 전환 단계</h4>
+        <div class="step-period" data-cms="program.step1.period">7 ~ 12개월</div>
+        <p data-cms="program.step1.description">약물 의존도를 매월 10~20%씩 줄이며 디지털 코칭을 강화합니다. 영양사, 트레이너, 의사 모니터링이 동반됩니다.</p>
+      </div>
+      <div class="program-step reveal" style="transition-delay:0.2s">
+        <div class="step-num">03</div>
+        <h4 data-cms="program.step2.title">자율 관리 단계</h4>
+        <div class="step-period" data-cms="program.step2.period">13 ~ 24개월</div>
+        <p data-cms="program.step2.description">사용자 패턴 파악이 완료되어 선제적 알림과 장기 습관 유지 메커니즘이 작동합니다. 완전한 자율 관리가 가능해집니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B2B -->
+<section class="b2b" id="b2b">
+  <div class="container">
+    <div class="b2b-header reveal">
+      <div class="label" data-cms="b2b.label">B2B Solutions</div>
+      <h2 data-cms="b2b.title">비즈니스 파트너를 위한 솔루션</h2>
+      <p data-cms="b2b.description">헬스장, 병원, 기업까지 데이터 기반 체성분 관리 솔루션을 제공합니다</p>
+    </div>
+    <div class="b2b-grid">
+      <div class="b2b-card reveal">
+        <h4 data-cms="b2b.card0.title">헬스장 / PT센터</h4>
+        <p data-cms="b2b.card0.description">회원별 체성분 대시보드로 데이터 기반 운동 프로그램을 설계하고, 회원 유지율을 높입니다.</p>
+        <div class="b2b-features">
+          <div class="b2b-feat" data-cms="b2b.card0.feat0">회원 체성분 실시간 모니터링</div>
+          <div class="b2b-feat" data-cms="b2b.card0.feat1">트레이너용 대시보드</div>
+          <div class="b2b-feat" data-cms="b2b.card0.feat2">데이터 기반 프로그램 설계</div>
+          <div class="b2b-feat" data-cms="b2b.card0.feat3">회원 리텐션 향상</div>
+        </div>
+      </div>
+      <div class="b2b-card reveal" style="transition-delay:0.1s">
+        <h4 data-cms="b2b.card1.title">병원 / 한의원</h4>
+        <p data-cms="b2b.card1.description">GLP-1 처방 환자의 체성분 변화를 원격 모니터링하고, 맞춤 치료 프로토콜을 지원합니다.</p>
+        <div class="b2b-features">
+          <div class="b2b-feat" data-cms="b2b.card1.feat0">의사용 환자 대시보드</div>
+          <div class="b2b-feat" data-cms="b2b.card1.feat1">EMR 데이터 연동</div>
+          <div class="b2b-feat" data-cms="b2b.card1.feat2">임상 PoC 검증</div>
+          <div class="b2b-feat" data-cms="b2b.card1.feat3">원격 환자 모니터링</div>
+        </div>
+      </div>
+      <div class="b2b-card reveal" style="transition-delay:0.2s">
+        <h4 data-cms="b2b.card2.title">기업 / 보험사</h4>
+        <p data-cms="b2b.card2.description">직원 건강관리 복지 프로그램과 보험사 GLP-1 고객 전용 패키지를 제공합니다. ROI 9배의 비용 절감 효과.</p>
+        <div class="b2b-features">
+          <div class="b2b-feat" data-cms="b2b.card2.feat0">직원 건강관리 프로그램</div>
+          <div class="b2b-feat" data-cms="b2b.card2.feat1">ESG 지표 개선</div>
+          <div class="b2b-feat" data-cms="b2b.card2.feat2">보험사 GLP-1 고객 패키지</div>
+          <div class="b2b-feat" data-cms="b2b.card2.feat3">인당 연 10만원 라이선스</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="container">
+    <div class="cta-content reveal">
+      <span class="label" data-cms="cta.label">Get Started</span>
+      <h2 data-cms="cta.title">건강한 습관이 온다</h2>
+      <p data-cms="cta.description">사전예약 및 파트너십 문의를 환영합니다</p>
+      <div class="cta-buttons">
+        <a href="mailto:365@onda.care" class="btn-primary" data-cms="cta.btn_primary">사전예약 문의하기 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <a href="#product" class="btn-outline" data-cms="cta.btn_secondary">제품 라인업 보기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo">
+          <img src="/static/images/onda-logo.png" alt="ONDA">
+          <span class="footer-company-name" data-cms="footer.company_name">주식회사 온다</span>
+        </a>
+      </div>
+      <div class="footer-col">
+        <h5>제품</h5>
+        <a href="#product">제품 라인업</a>
+        <a href="#solution">핵심 기능</a>
+        <a href="#program">졸업 프로그램</a>
+      </div>
+      <div class="footer-col">
+        <h5>비즈니스</h5>
+        <a href="#b2b">B2B 솔루션</a>
+        <a href="mailto:365@onda.care">파트너십 문의</a>
+      </div>
+      <div class="footer-col">
+        <h5>회사</h5>
+        <a href="mailto:365@onda.care">문의하기</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p data-cms="footer.copyright">&copy; 2026 주식회사 온다. All Rights Reserved.</p>
+    </div>
+    <div class="company-toggle">
+      <button class="company-toggle-btn" id="companyToggleBtn">
+        (주)온다 자세히 보기 <span class="arrow">&#9660;</span>
+      </button>
+      <div class="company-detail" id="companyDetail">
+        <div class="company-detail-inner" data-cms="footer.detail">
+          사업자등록번호: 295-81-03754 | 대표이사: 이한라<br>
+          주소: 서울특별시 관악구 관악로 168, 409-마51호<br>
+          대표메일: 365@onda.care
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+<script>
+(function() {
+  // Nav scroll
+  var nav = document.getElementById('nav');
+  window.addEventListener('scroll', function() {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Mobile toggle
+  var toggle = document.getElementById('mobileToggle');
+  var links = document.getElementById('navLinks');
+  toggle.addEventListener('click', function() {
+    links.classList.toggle('active');
+  });
+
+  // Close mobile nav on link click
+  links.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
+      links.classList.remove('active');
+    });
+  });
+
+  // Scroll reveal
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal, .reveal-scale').forEach(function(el) {
+    observer.observe(el);
+  });
+
+  // Company toggle
+  var btn = document.getElementById('companyToggleBtn');
+  var detail = document.getElementById('companyDetail');
+  if (btn && detail) {
+    btn.addEventListener('click', function() {
+      btn.classList.toggle('active');
+      detail.classList.toggle('open');
+    });
+  }
+
+  // ===== CMS: Dynamic Content Loading =====
+  function loadCMSContent() {
+    fetch('/content/onda-content.yml')
+      .then(function(res) { return res.text(); })
+      .then(function(text) {
+        var data = jsyaml.load(text);
+        applyCMS(data);
+      })
+      .catch(function(err) {
+        console.log('CMS content not loaded (using defaults):', err.message);
+      });
+  }
+
+  function setText(sel, val) {
+    var el = document.querySelector(sel);
+    if (el && val !== undefined) el.textContent = val;
+  }
+
+  function setHTML(sel, val) {
+    var el = document.querySelector(sel);
+    if (el && val !== undefined) el.innerHTML = val;
+  }
+
+  function applyCMS(d) {
+    if (!d) return;
+
+    // Site
+    if (d.site) {
+      if (d.site.title) document.title = d.site.title;
+      var metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && d.site.description) metaDesc.setAttribute('content', d.site.description);
+    }
+
+    // Hero
+    if (d.hero) {
+      setText('[data-cms="hero.badge"]', d.hero.badge);
+      var heroH1 = document.querySelector('[data-cms="hero.title"]');
+      if (heroH1) {
+        heroH1.innerHTML = d.hero.title_line1 + '<br><span class="gold">' + d.hero.title_highlight + '</span>' + d.hero.title_line2 + '<br>' + d.hero.title_line3;
+      }
+      setText('[data-cms="hero.description"]', d.hero.description);
+      setText('[data-cms="hero.btn_primary"]', d.hero.button_primary);
+      setText('[data-cms="hero.btn_secondary"]', d.hero.button_secondary);
+      var prodImg = document.querySelector('[data-cms="hero.product_image"]');
+      if (prodImg && d.hero.product_image) prodImg.src = d.hero.product_image;
+      if (d.hero.stats) {
+        d.hero.stats.forEach(function(s, i) {
+          setText('[data-cms="hero.stat' + i + '.number"]', s.number);
+          setText('[data-cms="hero.stat' + i + '.label"]', s.label);
+        });
+      }
+    }
+
+    // Problem
+    if (d.problem) {
+      setText('[data-cms="problem.label"]', d.problem.label);
+      setText('[data-cms="problem.title"]', d.problem.title);
+      setText('[data-cms="problem.description"]', d.problem.description);
+      if (d.problem.stats) {
+        d.problem.stats.forEach(function(s, i) {
+          setText('[data-cms="problem.stat' + i + '.number"]', s.number);
+          setText('[data-cms="problem.stat' + i + '.label"]', s.label);
+        });
+      }
+    }
+
+    // Features
+    if (d.features) {
+      d.features.forEach(function(f, i) {
+        setText('[data-cms="feature' + i + '.label"]', f.label);
+        var fh = document.querySelector('[data-cms="feature' + i + '.title"]');
+        if (fh) fh.innerHTML = f.title_line1 + '<br>' + f.title_line2;
+        setText('[data-cms="feature' + i + '.description"]', f.description);
+        setText('[data-cms="feature' + i + '.tag"]', f.tag);
+      });
+    }
+
+    // Products
+    if (d.products) {
+      setText('[data-cms="products.label"]', d.products.section_label);
+      setText('[data-cms="products.title"]', d.products.section_title);
+      setText('[data-cms="products.description"]', d.products.section_description);
+      if (d.products.items) {
+        d.products.items.forEach(function(p, i) {
+          setText('[data-cms="product' + i + '.model"]', p.model);
+          setText('[data-cms="product' + i + '.name"]', p.name);
+          setText('[data-cms="product' + i + '.price"]', p.price);
+          var link = document.querySelector('[data-cms="product' + i + '.link"]');
+          if (link && p.link) link.href = p.link;
+          var item = document.querySelector('[data-cms="product' + i + '.link"]');
+          if (item) {
+            if (p.featured) { item.classList.add('featured'); } else { item.classList.remove('featured'); }
+          }
+          if (p.specs) {
+            p.specs.forEach(function(spec, si) {
+              setText('[data-cms="product' + i + '.spec' + si + '"]', spec);
+            });
+          }
+        });
+      }
+    }
+
+    // Program
+    if (d.program) {
+      setText('[data-cms="program.label"]', d.program.label);
+      setText('[data-cms="program.title"]', d.program.title);
+      setText('[data-cms="program.description"]', d.program.description);
+      if (d.program.steps) {
+        d.program.steps.forEach(function(s, i) {
+          setText('[data-cms="program.step' + i + '.title"]', s.title);
+          setText('[data-cms="program.step' + i + '.period"]', s.period);
+          setText('[data-cms="program.step' + i + '.description"]', s.description);
+        });
+      }
+    }
+
+    // B2B
+    if (d.b2b) {
+      setText('[data-cms="b2b.label"]', d.b2b.label);
+      setText('[data-cms="b2b.title"]', d.b2b.title);
+      setText('[data-cms="b2b.description"]', d.b2b.description);
+      if (d.b2b.cards) {
+        d.b2b.cards.forEach(function(c, i) {
+          setText('[data-cms="b2b.card' + i + '.title"]', c.title);
+          setText('[data-cms="b2b.card' + i + '.description"]', c.description);
+          if (c.features) {
+            c.features.forEach(function(f, fi) {
+              setText('[data-cms="b2b.card' + i + '.feat' + fi + '"]', f);
+            });
+          }
+        });
+      }
+    }
+
+    // CTA
+    if (d.cta) {
+      setText('[data-cms="cta.label"]', d.cta.label);
+      setText('[data-cms="cta.title"]', d.cta.title);
+      setText('[data-cms="cta.description"]', d.cta.description);
+      var ctaBtn = document.querySelector('[data-cms="cta.btn_primary"]');
+      if (ctaBtn && d.cta.email) ctaBtn.parentElement.href = 'mailto:' + d.cta.email;
+      if (ctaBtn) ctaBtn.textContent = d.cta.button_primary;
+      setText('[data-cms="cta.btn_secondary"]', d.cta.button_secondary);
+    }
+
+    // Footer
+    if (d.footer) {
+      setText('[data-cms="footer.company_name"]', d.footer.company_name);
+      var copyright = document.querySelector('[data-cms="footer.copyright"]');
+      if (copyright) copyright.innerHTML = '&copy; ' + d.footer.copyright;
+      var companyDetail = document.querySelector('[data-cms="footer.detail"]');
+      if (companyDetail && d.footer.business_number) {
+        companyDetail.innerHTML = '사업자등록번호: ' + d.footer.business_number + ' | 대표이사: ' + d.footer.ceo + '<br>주소: ' + d.footer.address + '<br>대표메일: ' + d.footer.email;
+      }
+    }
+  }
+
+  // Load CMS content
+  loadCMSContent();
+})();
+</script>
+
+</body>
+</html>
