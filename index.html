@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     /* ===== RESET & BASE ===== */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -937,5 +938,17 @@
 })();
 </script>
 
+<script>
+  // Netlify Identity redirect: 초대/확인 링크 클릭 시 /admin/으로 이동
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", function(user) {
+      if (!user) {
+        window.netlifyIdentity.on("login", function() {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
 </body>
 </html>
